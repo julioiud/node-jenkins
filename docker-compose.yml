@@ -22,6 +22,5 @@ services:
       - "4004:80"
     networks:
       - proyectos-app
-
 networks:
   proyectos-app:
