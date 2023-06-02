@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage('Clonar el Repositorio'){
             steps {
@@ -29,6 +30,17 @@ pipeline {
                         """
                     }
                 }
+            }
+        }
+    }
+
+    post {
+        always {
+            emailext {
+                subject: "Estado del build: ${currentBuild.currentResult}",
+                body: "Se ha completado el despliegue. Ver detalles: ${env.BUILD_URL}",
+                to: "diego.ardila@est.iudigital.edu.co",
+                from: "jenkins@iudigital.edu.co"
             }
         }
     }
